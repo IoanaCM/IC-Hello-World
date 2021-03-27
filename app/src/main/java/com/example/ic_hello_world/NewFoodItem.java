@@ -1,6 +1,12 @@
 package com.example.ic_hello_world;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -8,6 +14,8 @@ import android.widget.CalendarView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -37,9 +45,27 @@ public class NewFoodItem  extends AppCompatActivity {
 
         mPost = (Button) findViewById(R.id.submitFood);
 
+        //Check permissions enabled
+        int permissionCheck = ContextCompat.checkSelfPermission(this,
+                android.Manifest.permission.ACCESS_FINE_LOCATION);
+
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    1);
+
         mPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+
+                @SuppressLint("MissingPermission") Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                double longitude = location.getLongitude();
+                double latitude = location.getLatitude();
+
                 String user_id = mAuth.getCurrentUser().getUid();
                 testAddItem addItem = new testAddItem(user_id);
                 final String name = mName.getText().toString();
@@ -56,5 +82,5 @@ public class NewFoodItem  extends AppCompatActivity {
 
     }
 
-
+    }
 }
