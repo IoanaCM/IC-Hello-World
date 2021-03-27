@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CalendarView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,6 +17,8 @@ import com.google.firebase.database.FirebaseDatabase;
 public class NewFoodItem  extends AppCompatActivity {
 
     private Button mPost;
+    private TextView mName,mPrice;
+    private CalendarView mDate;
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
@@ -27,7 +31,9 @@ public class NewFoodItem  extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-
+        mName = (TextView) findViewById(R.id.foodName);
+        mPrice = (TextView) findViewById(R.id.foodPrice);
+        mDate = (CalendarView) findViewById(R.id.calendarView);
 
         mPost = (Button) findViewById(R.id.submitFood);
 
@@ -36,7 +42,10 @@ public class NewFoodItem  extends AppCompatActivity {
             public void onClick(View v) {
                 String user_id = mAuth.getCurrentUser().getUid();
                 testAddItem addItem = new testAddItem(user_id);
-                addItem.writeNewItem("fromHere",2,"date");
+                final String name = mName.getText().toString();
+                final String price = mPrice.getText().toString();
+                final long date = mDate.getDate();
+                addItem.writeNewItem(name,price,date);
 //                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 //                String user_id = mAuth.getCurrentUser().getUid();
 //                DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
