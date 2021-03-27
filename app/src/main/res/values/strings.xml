@@ -12,4 +12,6 @@
     <string name="log_in">Log in</string>
     <string name="register">register</string>
     <string name="username">Username:</string>
+    <string name="registration">registration</string>
+    <string name="login">login</string>
 </resources>
