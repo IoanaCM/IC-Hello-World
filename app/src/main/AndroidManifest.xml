@@ -21,6 +21,11 @@
         <activity android:name=".MainActivity">
 
         </activity>
+
+        <activity android:name=".NewFoodItem"
+            android:label="NewFoodItem">
+
+        </activity>
     </application>
 
 </manifest>

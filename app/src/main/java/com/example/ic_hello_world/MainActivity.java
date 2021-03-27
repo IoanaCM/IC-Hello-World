@@ -17,6 +17,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class MainActivity extends AppCompatActivity {
 
     private Button mLogOut;
+    private Button mAddItem;
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
@@ -38,7 +39,18 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
                 return;
-                            }
+                            }});
+            mAddItem = (Button) findViewById(R.id.add_item);
+        mAddItem.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    FirebaseAuth.getInstance().signOut();
+                    Intent intent = new Intent(MainActivity.this, NewFoodItem.class);
+
+                    startActivity(intent);
+                    finish();
+                    return;
+                }
         });
     }
 

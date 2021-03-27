@@ -20,8 +20,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/log_out"
-        tools:layout_editor_absoluteX="311dp"
-        tools:layout_editor_absoluteY="74dp"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="161dp"
+        tools:layout_editor_absoluteY="508dp" />
+
+    <Button
+        android:id="@+id/add_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/add_item"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="161dp"
+        tools:layout_editor_absoluteY="433dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

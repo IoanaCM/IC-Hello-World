@@ -1,4 +1,14 @@
 package com.example.ic_hello_world;
 
-public class NewFoodItem {
+import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+public class NewFoodItem  extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.new_food_item);
+    }
 }
