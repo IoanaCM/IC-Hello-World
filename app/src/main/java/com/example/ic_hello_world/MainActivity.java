@@ -44,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
         mAddItem.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    FirebaseAuth.getInstance().signOut();
                     Intent intent = new Intent(MainActivity.this, NewFoodItem.class);
 
                     startActivity(intent);
