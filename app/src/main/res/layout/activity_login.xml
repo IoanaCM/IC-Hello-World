@@ -8,38 +8,69 @@
     tools:context="com.example.ic_hello_world.LoginActivity"
     android:orientation="vertical">
 
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="81dp"
+        android:background="#A1F6DC"
+        android:fontFamily="sans-serif-black"
+        android:gravity="center_horizontal|fill_vertical"
+        android:text="@string/less_waste"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="#000000"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.444"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="RtlSymmetry" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="81dp"
+        android:layout_marginEnd="4dp"
+        app:layout_constraintBottom_toBottomOf="@+id/title"
+        app:layout_constraintEnd_toEndOf="@+id/title"
+        app:layout_constraintTop_toTopOf="@+id/title"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/appletransparent" />
 
     <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="email"
         android:id="@+id/email"
-        android:paddingLeft="15dp"/>
+        android:layout_width="match_parent"
+        android:layout_height="51dp"
+        android:layout_marginTop="36dp"
+        android:hint="email"
+        android:paddingLeft="15dp" />
 
     <EditText
+        android:id="@+id/password"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="51dp"
+        android:layout_marginTop="36dp"
         android:hint="password"
-        android:paddingLeft="15dp"
-        android:id="@+id/password"/>
-
+        android:paddingLeft="15dp" />
 
     <Button
         android:id="@+id/login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="#9BC7DF"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:text="@string/login" />
-
+        android:background="#A1F6DC"
+        android:text="@string/login"
+        android:layout_marginTop="36dp"
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/registration"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="#9BC7DF"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:text="@string/registration" />
+        android:background="#A1F6DC"
+        android:text="@string/registration"
+        android:layout_marginTop="36dp"
+        android:textStyle="bold" />
 </LinearLayout>
