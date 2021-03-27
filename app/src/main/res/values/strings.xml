@@ -14,6 +14,7 @@
     <string name="username">Username:</string>
     <string name="registration">registration</string>
     <string name="login">login</string>
+    <string name="log_out">Log out</string>
     <string name="less_waste">Less Waste</string>
     <string name="add_food_to_sell">Add food to sell</string>
 </resources>
