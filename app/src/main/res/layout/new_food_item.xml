@@ -6,121 +6,133 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="101dp"
+        tools:layout_editor_absoluteY="221dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="410dp"
+                android:layout_height="81dp"
+                android:background="#A1F6DC"
+                android:fontFamily="sans-serif-black"
+                android:gravity="center_horizontal|fill_vertical"
+                android:text="@string/less_waste"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="#000000"
+                android:textSize="25sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.444"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="RtlSymmetry"
+                />
 
 
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="410dp"
-            android:layout_height="81dp"
-            android:background="#A1F6DC"
-            android:fontFamily="sans-serif-black"
-            android:gravity="center_horizontal|fill_vertical"
-            android:text="@string/less_waste"
-            android:textAppearance="@style/TextAppearance.AppCompat.Small"
-            android:textColor="#000000"
-            android:textSize="25sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.444"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="RtlSymmetry" />
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="110dp"
+                android:layout_height="81dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginTop="4dp"
+                app:layout_constraintBottom_toBottomOf="@+id/title"
+                app:layout_constraintEnd_toEndOf="@+id/title"
+                app:layout_constraintTop_toTopOf="@+id/title"
+                app:layout_constraintVertical_bias="0.0"
+                app:srcCompat="@drawable/appletransparent" />
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="411dp"
-            android:layout_height="37dp"
-            android:layout_marginTop="20dp"
-            android:background="#A1F6DC"
-            android:gravity="center_horizontal|fill_vertical"
-            android:text="@string/add_food_to_sell"
-            android:textColor="#000000"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/title" />
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="411dp"
+                android:layout_height="37dp"
+                android:layout_marginTop="4dp"
+                android:background="#A1F6DC"
+                android:gravity="center_horizontal|fill_vertical"
+                android:text="@string/add_food_to_sell"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/title" />
 
-        <EditText
-            android:id="@+id/foodName"
-            android:layout_width="259dp"
-            android:layout_height="51dp"
-            android:layout_marginTop="36dp"
-            android:hint="Name of item:"
-            android:inputType="text"
-            android:selectAllOnFocus="true"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.44"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
-
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="110dp"
-            android:layout_height="81dp"
-            android:layout_marginEnd="4dp"
-            app:layout_constraintBottom_toBottomOf="@+id/title"
-            app:layout_constraintEnd_toEndOf="@+id/title"
-            app:layout_constraintTop_toTopOf="@+id/title"
-            app:layout_constraintVertical_bias="0.0"
-            app:srcCompat="@drawable/appletransparent" />
+            <EditText
+                android:id="@+id/foodName"
+                android:layout_width="259dp"
+                android:layout_height="51dp"
+                android:layout_marginTop="36dp"
+                android:hint="Name of item:"
+                android:inputType="text"
+                android:selectAllOnFocus="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.44"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView" />
 
 
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="134dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="36dp"
-            android:background="@null"
-            android:text="Expiry Date:"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:inputType="text"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.241"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/foodName" />
 
-        <CalendarView
-            android:id="@+id/calendarView"
-            android:layout_width="277dp"
-            android:layout_height="222dp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
-        <EditText
-            android:id="@+id/foodPrice"
-            android:layout_width="259dp"
-            android:layout_height="51dp"
-            android:layout_marginTop="36dp"
-            android:hint="Price: "
-            android:inputType="text"
-            android:selectAllOnFocus="true"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/calendarView" />
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="134dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="36dp"
+                android:background="@null"
+                android:inputType="text"
+                android:text="Expiry Date:"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.241"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/foodName" />
 
-        <Button
-            android:id="@+id/submitFood"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Post"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:background="#A1F6DC"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/foodPrice" />
+            <CalendarView
+                android:id="@+id/calendarView"
+                android:layout_width="277dp"
+                android:layout_height="222dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
+            <EditText
+                android:id="@+id/foodPrice"
+                android:layout_width="259dp"
+                android:layout_height="51dp"
+                android:layout_marginTop="36dp"
+                android:hint="Price: "
+                android:inputType="text"
+                android:selectAllOnFocus="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/calendarView" />
+
+            <Button
+                android:id="@+id/submitFood"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="#A1F6DC"
+                android:text="Post"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/foodPrice" />
+
+        </LinearLayout>
     </ScrollView>
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
