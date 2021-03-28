@@ -23,7 +23,9 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -34,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
 
     private Context theContext = this;
+
+    private Map<Button, Item> buttonContext = new HashMap<>();
 
 
     @Override
@@ -81,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
                         System.out.println(uuid.getKey());
                         UserItem userItem = new UserItem(uuid.getKey());
                         for (DataSnapshot product : uuid.getChildren()) {
-                            Item item = new Item();
+                            Item item = new Item(uuid.getKey());
                             System.out.println(product.child("expires").getValue());
                             item.setDate(Long.valueOf(product.child("expires").getValue().toString()));
                             item.setName(product.getKey());
@@ -104,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
 
-                    ItemAdapter adapter = new ItemAdapter(theContext,items,R.layout.list_item);
+                    ItemAdapter adapter = new ItemAdapter(theContext,items,R.layout.list_item, buttonContext);
                     ListView listView = (ListView) findViewById(R.id.items_list);
 
 
