@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -30,17 +31,21 @@ public class ItemAdapter extends ArrayAdapter<Item> {
 
     private Map<Button, Item> buttonContext;
 
+    private AppCompatActivity view;
 
-    public ItemAdapter(Context context, ArrayList<Item> items,int tileLayout, Map<Button, Item> buttonContext)
+
+    public ItemAdapter(Context context, ArrayList<Item> items,int tileLayout, Map<Button, Item> buttonContext, AppCompatActivity view)
     {
         super(context,0,items);
         this.tileLayout = tileLayout;
         this.buttonContext = buttonContext;
+
+        this.view = view;
     }
 
     @NonNull
     @Override
-    public View getView(int position, View convertView, ViewGroup parent)
+    public View getView(int position, final View convertView, ViewGroup parent)
     {
         View listItemView = convertView;
         if(listItemView==null)
@@ -77,6 +82,10 @@ public class ItemAdapter extends ArrayAdapter<Item> {
                     String user_id = FirebaseAuth.getInstance().getCurrentUser().getUid();
                     FirebaseQuery query = new FirebaseQuery(user_id,buttonContext.get(button).getUuidOwner());
                     query.deleteItem(buttonContext.get(button).getName());
+
+                    Intent intent = new Intent(ItemAdapter.super.getContext(), MyItemsActivity.class);;
+
+                    view.recreate();
                 }
 
                 System.out.println(buttonContext.get(button).getName());

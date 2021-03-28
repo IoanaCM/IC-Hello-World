@@ -51,7 +51,6 @@ private Context context = this;
         mAddItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FirebaseAuth.getInstance().signOut();
                 Intent intent = new Intent(MyItemsActivity.this, NewFoodItem.class);
 
                 startActivity(intent);
@@ -95,7 +94,7 @@ private Context context = this;
                         }
                     }
 
-                    ItemAdapter adapter1 = new ItemAdapter(context,my_pantry,R.layout.list_item2, buttonContext);
+                    ItemAdapter adapter1 = new ItemAdapter(context,my_pantry,R.layout.list_item2, buttonContext, MyItemsActivity.this);
                     ListView listView1 = (ListView) findViewById(R.id.my_pantry_list);
                     listView1.setAdapter(adapter1);
 

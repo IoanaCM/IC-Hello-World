@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
 
-                    ItemAdapter adapter = new ItemAdapter(theContext,items,R.layout.list_item, buttonContext);
+                    ItemAdapter adapter = new ItemAdapter(theContext,items,R.layout.list_item, buttonContext, MainActivity.this);
                     ListView listView = (ListView) findViewById(R.id.items_list);
 
 
