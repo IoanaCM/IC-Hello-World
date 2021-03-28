@@ -78,6 +78,10 @@ public class ItemAdapter extends ArrayAdapter<Item> {
                     FirebaseQuery query = new FirebaseQuery(user_id,buttonContext.get(button).getUuidOwner());
                     query.buyItem(buttonContext.get(button).getName());
 
+                    Intent intent = new Intent(ItemAdapter.super.getContext(), MyItemsActivity.class);;
+
+                    view.recreate();
+
                 } else if(button.getText().equals("Delete")) {
                     String user_id = FirebaseAuth.getInstance().getCurrentUser().getUid();
                     FirebaseQuery query = new FirebaseQuery(user_id,buttonContext.get(button).getUuidOwner());
