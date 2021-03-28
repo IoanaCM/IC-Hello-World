@@ -2,6 +2,7 @@ package com.example.ic_hello_world;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -22,10 +23,10 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class NewFoodItem  extends AppCompatActivity {
+public class NewFoodItem extends AppCompatActivity {
 
     private Button mPost;
-    private TextView mName,mPrice;
+    private TextView mName, mPrice;
     private CalendarView mDate;
 
     private FirebaseAuth mAuth;
@@ -37,6 +38,10 @@ public class NewFoodItem  extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.new_food_item);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
+
         mAuth = FirebaseAuth.getInstance();
 
         mName = (TextView) findViewById(R.id.foodName);
@@ -44,9 +49,6 @@ public class NewFoodItem  extends AppCompatActivity {
         mDate = (CalendarView) findViewById(R.id.calendarView);
 
         mPost = (Button) findViewById(R.id.submitFood);
-
-
-
 
 
         mPost.setOnClickListener(new View.OnClickListener() {
@@ -57,15 +59,15 @@ public class NewFoodItem  extends AppCompatActivity {
                 final String name = mName.getText().toString();
                 final String price = mPrice.getText().toString();
                 final long date = mDate.getDate();
-                addItem.writeNewItem(name,price,date);
+                addItem.writeNewItem(name, price, date);
 //                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 //                String user_id = mAuth.getCurrentUser().getUid();
 //                DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
 //                databaseReference.child("items").child(user_id).child("someItem").child("expires").setValue("date");
 //                databaseReference.child("items").child(user_id).child("someItem").child("quantity").setValue(2);
                 return;
-            }});
-
+            }
+        });
 
 
     }

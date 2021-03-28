@@ -49,29 +49,7 @@
             app:layout_constraintVertical_bias="0.0"
             app:srcCompat="@drawable/appletransparent" />
 
-        <Button
-            android:id="@+id/log_out"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/log_out"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="0dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.924"
-            app:layout_constraintStart_toEndOf="@+id/add_item"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteY="16dp" />
 
-        <Button
-            android:id="@+id/add_item"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="0dp"
-            android:layout_marginTop="20dp"
-            android:text="@string/add_item"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteY="16dp" />
 
         <TextView
             android:id="@+id/textView"
@@ -91,10 +69,35 @@
 
         <ListView
             android:id="@+id/items_list"
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="247dp"
+            android:orientation="vertical"
             tools:context="com.example.IC-hello-world.MainActivity" />
+
+        <Button
+            android:id="@+id/add_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/add_item"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteY="16dp" />
+
+        <Button
+            android:id="@+id/log_out"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="0dp"
+            android:text="@string/log_out"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.924"
+            app:layout_constraintStart_toEndOf="@+id/add_item"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteY="16dp" />
+
 
     </LinearLayout>
     </ScrollView>
