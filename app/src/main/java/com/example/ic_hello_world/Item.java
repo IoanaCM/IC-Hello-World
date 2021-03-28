@@ -5,20 +5,17 @@ public class Item {
     private String name;
     private Long date;
     private String price;
-    private Boolean sold = false;
+    private String boughtBy;
 
-    public Item(){}
-    public Item(String name, long date,String price){
-        this.name = name;
-        this.date = date;
-        this.price = price;
+    public Item() {
     }
 
-    public Item(String name, long date,String price,boolean sold){
+    public Item(String name, long date, String price) {
         this.name = name;
         this.date = date;
         this.price = price;
-        this.sold = sold;
+        this.boughtBy = "";
+
     }
 
     public String getName() {
@@ -29,13 +26,10 @@ public class Item {
         return date;
     }
 
-    public String getPrice() {
-        return price;
-    }
+    public String getPrice() { return price; }
 
-    public Boolean getSold() {
-        return sold;
-    }
+    public String getBoughtBy(){return boughtBy;}
+
 
     public void setName(String name) {
         this.name = name;
@@ -49,7 +43,7 @@ public class Item {
         this.price = price;
     }
 
-    public void setSold(boolean sold){this.sold = sold;}
+    public void setBoughtBy(String boughtBy){this.boughtBy = boughtBy;}
 
 
 }

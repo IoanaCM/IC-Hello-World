@@ -108,14 +108,14 @@ public class MainActivity extends AppCompatActivity {
                     for(UserItem user : result) {
                         for (Item item : user.getItems()) {
                             //add item details to view
-                            items.add(item);
+                            if(item.getBoughtBy().equals("")){
+                                items.add(item);
+                            }
                         }
                     }
 
                     ItemAdapter adapter = new ItemAdapter(theContext,items);
                     ListView listView = (ListView) findViewById(R.id.items_list);
-
-
 
                     listView.setAdapter(adapter);
 
