@@ -45,12 +45,8 @@ public class NewFoodItem  extends AppCompatActivity {
 
         mPost = (Button) findViewById(R.id.submitFood);
 
-    }
-    @Override
-    public void onBackPressed() {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-    }
+
+
 
 
         mPost.setOnClickListener(new View.OnClickListener() {
@@ -69,6 +65,8 @@ public class NewFoodItem  extends AppCompatActivity {
 //                databaseReference.child("items").child(user_id).child("someItem").child("quantity").setValue(2);
                 return;
             }});
+
+
 
     }
 
