@@ -45,6 +45,13 @@ public class NewFoodItem  extends AppCompatActivity {
 
         mPost = (Button) findViewById(R.id.submitFood);
 
+    }
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
 
         mPost.setOnClickListener(new View.OnClickListener() {
             @Override

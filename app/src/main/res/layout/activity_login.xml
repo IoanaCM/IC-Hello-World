@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/backg"
 
     tools:context="com.example.ic_hello_world.LoginActivity"
     android:orientation="vertical">
@@ -11,13 +12,12 @@
     <TextView
         android:id="@+id/title"
         android:layout_width="match_parent"
-        android:layout_height="81dp"
-        android:background="#A1F6DC"
-        android:fontFamily="sans-serif-black"
+        android:layout_height="89dp"
+        android:fontFamily="@font/light"
         android:gravity="center_horizontal|fill_vertical"
         android:text="@string/less_waste"
         android:textAppearance="@style/TextAppearance.AppCompat.Small"
-        android:textColor="#000000"
+        android:textColor="#CDFFFA"
         android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.444"
@@ -28,7 +28,7 @@
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="wrap_content"
-        android:layout_height="81dp"
+        android:layout_height="127dp"
         android:layout_marginEnd="4dp"
         app:layout_constraintBottom_toBottomOf="@+id/title"
         app:layout_constraintEnd_toEndOf="@+id/title"
