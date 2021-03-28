@@ -103,7 +103,9 @@ public class MainActivity extends AppCompatActivity {
                         if(!user_id.equals(user.getUUID())) {
                             for (Item item : user.getItems()) {
                                 //add item details to view
-                                items.add(item);
+                                if(item.getUuidBuyer().equals("") || item.getUuidBuyer() == null){
+                                    items.add(item);
+                                }
                             }
                         }
                     }
