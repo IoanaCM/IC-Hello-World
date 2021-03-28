@@ -1,0 +1,138 @@
+Index: app/src/main/java/com/example/ic_hello_world/NewFoodItem.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.ic_hello_world;\r\n\r\nimport android.Manifest;\r\nimport android.annotation.SuppressLint;\r\nimport android.content.Context;\r\nimport android.content.Intent;\r\nimport android.content.pm.PackageManager;\r\nimport android.location.Location;\r\nimport android.location.LocationManager;\r\nimport android.os.Bundle;\r\nimport android.view.View;\r\nimport android.widget.Button;\r\nimport android.widget.CalendarView;\r\nimport android.widget.TextView;\r\n\r\nimport androidx.appcompat.app.AppCompatActivity;\r\nimport androidx.core.app.ActivityCompat;\r\nimport androidx.core.content.ContextCompat;\r\n\r\nimport com.google.firebase.auth.FirebaseAuth;\r\nimport com.google.firebase.auth.FirebaseUser;\r\nimport com.google.firebase.database.DatabaseReference;\r\nimport com.google.firebase.database.FirebaseDatabase;\r\n\r\npublic class NewFoodItem  extends AppCompatActivity {\r\n\r\n    private Button mPost;\r\n    private TextView mName,mPrice;\r\n    private CalendarView mDate;\r\n\r\n    private FirebaseAuth mAuth;\r\n    private FirebaseAuth.AuthStateListener firebaseAuthListener;\r\n\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.new_food_item);\r\n\r\n        mAuth = FirebaseAuth.getInstance();\r\n\r\n        mName = (TextView) findViewById(R.id.foodName);\r\n        mPrice = (TextView) findViewById(R.id.foodPrice);\r\n        mDate = (CalendarView) findViewById(R.id.calendarView);\r\n\r\n        mPost = (Button) findViewById(R.id.submitFood);\r\n\r\n\r\n        mPost.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                String user_id = mAuth.getCurrentUser().getUid();\r\n                testAddItem addItem = new testAddItem(user_id);\r\n                final String name = mName.getText().toString();\r\n                final String price = mPrice.getText().toString();\r\n                final long date = mDate.getDate();\r\n                addItem.writeNewItem(name,price,date);\r\n//                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();\r\n//                String user_id = mAuth.getCurrentUser().getUid();\r\n//                DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();\r\n//                databaseReference.child(\"items\").child(user_id).child(\"someItem\").child(\"expires\").setValue(\"date\");\r\n//                databaseReference.child(\"items\").child(user_id).child(\"someItem\").child(\"quantity\").setValue(2);\r\n                return;\r\n            }});\r\n\r\n    }\r\n\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/ic_hello_world/NewFoodItem.java	(revision 87a8dd17d371e7ff0cb1df1d123e8965d5800fd1)
++++ app/src/main/java/com/example/ic_hello_world/NewFoodItem.java	(date 1616892104952)
+@@ -45,6 +45,13 @@
+ 
+         mPost = (Button) findViewById(R.id.submitFood);
+ 
++    }
++    @Override
++    public void onBackPressed() {
++        Intent intent = new Intent(this, MainActivity.class);
++        startActivity(intent);
++    }
++
+ 
+         mPost.setOnClickListener(new View.OnClickListener() {
+             @Override
+Index: app/src/main/res/layout/activity_login.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<LinearLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n\r\n    tools:context=\"com.example.ic_hello_world.LoginActivity\"\r\n    android:orientation=\"vertical\">\r\n\r\n    <TextView\r\n        android:id=\"@+id/title\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"81dp\"\r\n        android:background=\"#A1F6DC\"\r\n        android:fontFamily=\"sans-serif-black\"\r\n        android:gravity=\"center_horizontal|fill_vertical\"\r\n        android:text=\"@string/less_waste\"\r\n        android:textAppearance=\"@style/TextAppearance.AppCompat.Small\"\r\n        android:textColor=\"#000000\"\r\n        android:textSize=\"25sp\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.444\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\"\r\n        tools:ignore=\"RtlSymmetry\" />\r\n\r\n    <ImageView\r\n        android:id=\"@+id/imageView2\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"81dp\"\r\n        android:layout_marginEnd=\"4dp\"\r\n        app:layout_constraintBottom_toBottomOf=\"@+id/title\"\r\n        app:layout_constraintEnd_toEndOf=\"@+id/title\"\r\n        app:layout_constraintTop_toTopOf=\"@+id/title\"\r\n        app:layout_constraintVertical_bias=\"0.0\"\r\n        app:srcCompat=\"@drawable/appletransparent\" />\r\n\r\n    <EditText\r\n        android:id=\"@+id/email\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"51dp\"\r\n        android:layout_marginTop=\"36dp\"\r\n        android:hint=\"email\"\r\n        android:paddingLeft=\"15dp\" />\r\n\r\n    <EditText\r\n        android:id=\"@+id/password\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"51dp\"\r\n        android:layout_marginTop=\"36dp\"\r\n        android:hint=\"password\"\r\n        android:paddingLeft=\"15dp\" />\r\n\r\n    <Button\r\n        android:id=\"@+id/login\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginLeft=\"10dp\"\r\n        android:layout_marginRight=\"10dp\"\r\n        android:background=\"#A1F6DC\"\r\n        android:text=\"@string/login\"\r\n        android:layout_marginTop=\"36dp\"\r\n        android:textStyle=\"bold\" />\r\n\r\n    <Button\r\n        android:id=\"@+id/registration\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginLeft=\"10dp\"\r\n        android:layout_marginRight=\"10dp\"\r\n        android:background=\"#A1F6DC\"\r\n        android:text=\"@string/registration\"\r\n        android:layout_marginTop=\"36dp\"\r\n        android:textStyle=\"bold\" />\r\n</LinearLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/activity_login.xml	(revision 87a8dd17d371e7ff0cb1df1d123e8965d5800fd1)
++++ app/src/main/res/layout/activity_login.xml	(date 1616888180120)
+@@ -4,6 +4,7 @@
+     xmlns:tools="http://schemas.android.com/tools"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
++    android:background="@drawable/backg"
+ 
+     tools:context="com.example.ic_hello_world.LoginActivity"
+     android:orientation="vertical">
+@@ -11,13 +12,12 @@
+     <TextView
+         android:id="@+id/title"
+         android:layout_width="match_parent"
+-        android:layout_height="81dp"
+-        android:background="#A1F6DC"
+-        android:fontFamily="sans-serif-black"
++        android:layout_height="89dp"
++        android:fontFamily="@font/light"
+         android:gravity="center_horizontal|fill_vertical"
+         android:text="@string/less_waste"
+         android:textAppearance="@style/TextAppearance.AppCompat.Small"
+-        android:textColor="#000000"
++        android:textColor="#CDFFFA"
+         android:textSize="25sp"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintHorizontal_bias="0.444"
+@@ -28,7 +28,7 @@
+     <ImageView
+         android:id="@+id/imageView2"
+         android:layout_width="wrap_content"
+-        android:layout_height="81dp"
++        android:layout_height="127dp"
+         android:layout_marginEnd="4dp"
+         app:layout_constraintBottom_toBottomOf="@+id/title"
+         app:layout_constraintEnd_toEndOf="@+id/title"
+Index: app/src/main/res/layout/new_food_item.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout\r\n    xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\">\r\n\r\n\r\n    <ScrollView\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"match_parent\"\r\n        tools:layout_editor_absoluteX=\"101dp\"\r\n        tools:layout_editor_absoluteY=\"221dp\">\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"match_parent\"\r\n            android:orientation=\"vertical\"\r\n            android:gravity=\"center_horizontal\">\r\n\r\n            <TextView\r\n                android:id=\"@+id/title\"\r\n                android:layout_width=\"410dp\"\r\n                android:layout_height=\"81dp\"\r\n                android:background=\"#A1F6DC\"\r\n                android:fontFamily=\"sans-serif-black\"\r\n                android:gravity=\"center_horizontal|fill_vertical\"\r\n                android:text=\"@string/less_waste\"\r\n                android:textAppearance=\"@style/TextAppearance.AppCompat.Small\"\r\n                android:textColor=\"#000000\"\r\n                android:textSize=\"25sp\"\r\n                app:layout_constraintEnd_toEndOf=\"parent\"\r\n                app:layout_constraintHorizontal_bias=\"0.444\"\r\n                app:layout_constraintStart_toStartOf=\"parent\"\r\n                app:layout_constraintTop_toTopOf=\"parent\"\r\n                tools:ignore=\"RtlSymmetry\"\r\n                />\r\n\r\n\r\n            <ImageView\r\n                android:id=\"@+id/imageView2\"\r\n                android:layout_width=\"110dp\"\r\n                android:layout_height=\"81dp\"\r\n                android:layout_marginEnd=\"4dp\"\r\n                android:layout_marginTop=\"4dp\"\r\n                app:layout_constraintBottom_toBottomOf=\"@+id/title\"\r\n                app:layout_constraintEnd_toEndOf=\"@+id/title\"\r\n                app:layout_constraintTop_toTopOf=\"@+id/title\"\r\n                app:layout_constraintVertical_bias=\"0.0\"\r\n                app:srcCompat=\"@drawable/appletransparent\" />\r\n\r\n            <TextView\r\n                android:id=\"@+id/textView\"\r\n                android:layout_width=\"411dp\"\r\n                android:layout_height=\"37dp\"\r\n                android:layout_marginTop=\"4dp\"\r\n                android:background=\"#A1F6DC\"\r\n                android:gravity=\"center_horizontal|fill_vertical\"\r\n                android:text=\"@string/add_food_to_sell\"\r\n                android:textColor=\"#000000\"\r\n                android:textSize=\"20sp\"\r\n                android:textStyle=\"bold\"\r\n                app:layout_constraintEnd_toEndOf=\"parent\"\r\n                app:layout_constraintHorizontal_bias=\"1.0\"\r\n                app:layout_constraintStart_toStartOf=\"parent\"\r\n                app:layout_constraintTop_toBottomOf=\"@+id/title\" />\r\n\r\n            <EditText\r\n                android:id=\"@+id/foodName\"\r\n                android:layout_width=\"259dp\"\r\n                android:layout_height=\"51dp\"\r\n                android:layout_marginTop=\"36dp\"\r\n                android:hint=\"Name of item:\"\r\n                android:inputType=\"text\"\r\n                android:selectAllOnFocus=\"true\"\r\n                app:layout_constraintEnd_toEndOf=\"parent\"\r\n                app:layout_constraintHorizontal_bias=\"0.44\"\r\n                app:layout_constraintStart_toStartOf=\"parent\"\r\n                app:layout_constraintTop_toBottomOf=\"@+id/textView\" />\r\n\r\n\r\n\r\n\r\n            <TextView\r\n                android:id=\"@+id/textView3\"\r\n                android:layout_width=\"134dp\"\r\n                android:layout_height=\"30dp\"\r\n                android:layout_marginTop=\"36dp\"\r\n                android:background=\"@null\"\r\n                android:inputType=\"text\"\r\n                android:text=\"Expiry Date:\"\r\n                android:textSize=\"18sp\"\r\n                android:textStyle=\"bold\"\r\n                app:layout_constraintEnd_toEndOf=\"parent\"\r\n                app:layout_constraintHorizontal_bias=\"0.241\"\r\n                app:layout_constraintStart_toStartOf=\"parent\"\r\n                app:layout_constraintTop_toBottomOf=\"@+id/foodName\" />\r\n\r\n            <CalendarView\r\n                android:id=\"@+id/calendarView\"\r\n                android:layout_width=\"277dp\"\r\n                android:layout_height=\"222dp\"\r\n                android:layout_marginTop=\"16dp\"\r\n                app:layout_constraintEnd_toEndOf=\"parent\"\r\n                app:layout_constraintStart_toStartOf=\"parent\"\r\n                app:layout_constraintTop_toBottomOf=\"@+id/textView3\" />\r\n\r\n            <EditText\r\n                android:id=\"@+id/foodPrice\"\r\n                android:layout_width=\"259dp\"\r\n                android:layout_height=\"51dp\"\r\n                android:layout_marginTop=\"36dp\"\r\n                android:hint=\"Price: \"\r\n                android:inputType=\"text\"\r\n                android:selectAllOnFocus=\"true\"\r\n                app:layout_constraintEnd_toEndOf=\"parent\"\r\n                app:layout_constraintStart_toStartOf=\"parent\"\r\n                app:layout_constraintTop_toBottomOf=\"@+id/calendarView\" />\r\n\r\n            <Button\r\n                android:id=\"@+id/submitFood\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginTop=\"16dp\"\r\n                android:background=\"#A1F6DC\"\r\n                android:text=\"Post\"\r\n                android:textSize=\"16sp\"\r\n                android:textStyle=\"bold\"\r\n                app:layout_constraintEnd_toEndOf=\"parent\"\r\n                app:layout_constraintHorizontal_bias=\"0.498\"\r\n                app:layout_constraintStart_toStartOf=\"parent\"\r\n                app:layout_constraintTop_toBottomOf=\"@+id/foodPrice\" />\r\n\r\n        </LinearLayout>\r\n    </ScrollView>\r\n\r\n</androidx.constraintlayout.widget.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/new_food_item.xml	(revision 87a8dd17d371e7ff0cb1df1d123e8965d5800fd1)
++++ app/src/main/res/layout/new_food_item.xml	(date 1616888180128)
+@@ -4,7 +4,9 @@
+     xmlns:app="http://schemas.android.com/apk/res-auto"
+     xmlns:tools="http://schemas.android.com/tools"
+     android:layout_width="match_parent"
+-    android:layout_height="match_parent">
++    android:layout_height="match_parent"
++    android:background="@drawable/backg"
++    >
+ 
+ 
+     <ScrollView
+@@ -23,7 +25,7 @@
+                 android:id="@+id/title"
+                 android:layout_width="410dp"
+                 android:layout_height="81dp"
+-                android:background="#A1F6DC"
++                android:layout_marginTop="10dp"
+                 android:fontFamily="sans-serif-black"
+                 android:gravity="center_horizontal|fill_vertical"
+                 android:text="@string/less_waste"
+@@ -43,7 +45,7 @@
+                 android:layout_width="110dp"
+                 android:layout_height="81dp"
+                 android:layout_marginEnd="4dp"
+-                android:layout_marginTop="4dp"
++                android:layout_marginTop="-10dp"
+                 app:layout_constraintBottom_toBottomOf="@+id/title"
+                 app:layout_constraintEnd_toEndOf="@+id/title"
+                 app:layout_constraintTop_toTopOf="@+id/title"
+@@ -54,8 +56,8 @@
+                 android:id="@+id/textView"
+                 android:layout_width="411dp"
+                 android:layout_height="37dp"
+-                android:layout_marginTop="4dp"
+-                android:background="#A1F6DC"
++                android:layout_marginTop="25dp"
++                android:background="#0"
+                 android:gravity="center_horizontal|fill_vertical"
+                 android:text="@string/add_food_to_sell"
+                 android:textColor="#000000"
+Index: app/src/main/res/values/strings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><resources>\r\n    <string name=\"app_name\">IC-Hello-World</string>\r\n    <string name=\"title_activity_login\">LoginActivity</string>\r\n    <string name=\"prompt_email\">Email</string>\r\n    <string name=\"prompt_password\">Password</string>\r\n    <string name=\"action_sign_in\">Sign in or register</string>\r\n    <string name=\"action_sign_in_short\">Sign in</string>\r\n    <string name=\"welcome\">\"Welcome !\"</string>\r\n    <string name=\"invalid_username\">Not a valid username</string>\r\n    <string name=\"invalid_password\">Password must be >5 characters</string>\r\n    <string name=\"login_failed\">\"Login failed\"</string>\r\n    <string name=\"log_in\">Log in</string>\r\n    <string name=\"register\">register</string>\r\n    <string name=\"username\">Username:</string>\r\n    <string name=\"registration\">registration</string>\r\n    <string name=\"login\">login</string>\r\n    <string name=\"log_out\">Log out</string>\r\n    <string name=\"less_waste\">Less Waste</string>\r\n    <string name=\"add_food_to_sell\">Add food to sell</string>\r\n    <string name=\"add_item\">Add Item</string>\r\n</resources>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/values/strings.xml	(revision 87a8dd17d371e7ff0cb1df1d123e8965d5800fd1)
++++ app/src/main/res/values/strings.xml	(date 1616888180136)
+@@ -15,7 +15,7 @@
+     <string name="registration">registration</string>
+     <string name="login">login</string>
+     <string name="log_out">Log out</string>
+-    <string name="less_waste">Less Waste</string>
++    <string name="less_waste">LESS WASTE</string>
+     <string name="add_food_to_sell">Add food to sell</string>
+     <string name="add_item">Add Item</string>
+ </resources>
+\ No newline at end of file
+diff --git .idea/shelf/Uncommitted_changes_before_Update_at_27_03_2021_18_23__Default_Changelist_.xml .idea/shelf/Uncommitted_changes_before_Update_at_27_03_2021_18_23__Default_Changelist_.xml
+diff --git .idea/shelf/Uncommitted_changes_before_Update_at_27_03_2021_14_50__Default_Changelist_.xml .idea/shelf/Uncommitted_changes_before_Update_at_27_03_2021_14_50__Default_Changelist_.xml
+diff --git .idea/shelf/Uncommitted_changes_before_Update_at_27_03_2021_22_45__Default_Changelist_.xml .idea/shelf/Uncommitted_changes_before_Update_at_27_03_2021_22_45__Default_Changelist_.xml
+diff --git .idea/shelf/Uncommitted_changes_before_Update_at_27_03_2021_16_56__Default_Changelist_.xml .idea/shelf/Uncommitted_changes_before_Update_at_27_03_2021_16_56__Default_Changelist_.xml
