@@ -70,7 +70,7 @@ public class NewFoodItem extends AppCompatActivity {
                 String user_id = mAuth.getCurrentUser().getUid();
                 testAddItem addItem = new testAddItem(user_id);
                 final String name = mName.getText().toString();
-                final String price = mPrice.getText().toString();
+                final String price = "£" + mPrice.getText().toString();
                 final long date = mDate.getDate();
                 addItem.writeNewItem(name, price, date);
                 Intent intent = new Intent(NewFoodItem.this, MainActivity.class);
