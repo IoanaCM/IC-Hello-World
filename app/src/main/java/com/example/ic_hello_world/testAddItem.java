@@ -18,6 +18,7 @@ public class testAddItem {
     public void writeNewItem(String item, String price, Long date) {
         databaseReference.child("items").child(user_id).child(item).child("expires").setValue(date);
         databaseReference.child("items").child(user_id).child(item).child("price").setValue(price);
+        databaseReference.child("items").child(user_id).child(item).child("sold").setValue(false);
     }
 
 }
