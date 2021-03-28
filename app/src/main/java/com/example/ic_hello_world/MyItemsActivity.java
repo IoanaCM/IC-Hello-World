@@ -37,16 +37,6 @@ private Context context = this;
 
         getSupportActionBar().hide();
 
-
-
-        //ArrayList<Item> order_history = new ArrayList<>();
-        //order_history.add(new Item("cake",1213232,"12"));
-
-        //ItemAdapter adapter2 = new ItemAdapter(this,order_history,R.layout.list_item2);
-
-        //ListView listView2 = (ListView) findViewById(R.id.order_history_list);
-
-        //listView2.setAdapter(adapter2);
         mHomeButton = (Button) findViewById(R.id.returnHome);
         mHomeButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,19 +67,14 @@ private Context context = this;
                 if (dataSnapshot.exists()) {
                     List<UserItem> result = new ArrayList<>();
                     for (DataSnapshot uuid : dataSnapshot.getChildren()) {
-                        System.out.println(uuid.getKey());
                         UserItem userItem = new UserItem(uuid.getKey());
                         for (DataSnapshot product : uuid.getChildren()) {
                             Item item = new Item(uuid.getKey());
-                            System.out.println(product.child("expires").getValue());
                             item.setDate(Long.valueOf(product.child("expires").getValue().toString()));
                             item.setName(product.getKey());
                             item.setUuidBuyer(product.child("bought-by").getValue().toString());
-                            if(item.getUuidBuyer().equals("")) {
-                                item.setPrice(product.child("price").getValue().toString());
-                            } else{
-                                item.setPrice("SOLD");
-                            }
+
+                            item.setPrice(product.child("price").getValue().toString());
 
                             userItem.addItem(item);
                         }
@@ -102,20 +87,30 @@ private Context context = this;
                     String user_id = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
                     for(UserItem user : result) {
-                        if(user_id.equals(user.getUUID())) {
+
                             for (Item item : user.getItems()) {
                                 //add item details to view
-                                my_pantry.add(item);
+                                if(user_id.equals(user.getUUID())) {
+                                    if (!item.getUuidBuyer().equals("")) {
+                                        item.setPrice("SOLD");
+                                    }
+                                    my_pantry.add(item);
+                                }
+                                System.out.println(item.getUuidBuyer());
+                                if(user_id.equals(item.getUuidBuyer())) {
+                                    order_history.add(item);
+                                }
+
+
                             }
-                        }
+
                     }
-                    order_history = my_pantry;
 
                     ItemAdapter adapter1 = new ItemAdapter(context,my_pantry,R.layout.list_item2, buttonContext, MyItemsActivity.this);
                     ListView listView1 = (ListView) findViewById(R.id.my_pantry_list);
                     listView1.setAdapter(adapter1);
 
-                    ItemAdapter adapter2 = new ItemAdapter(context,my_pantry,R.layout.list_item3, buttonContext, MyItemsActivity.this);
+                    ItemAdapter adapter2 = new ItemAdapter(context,order_history,R.layout.list_item3, buttonContext, MyItemsActivity.this);
                     ListView listView2 = (ListView) findViewById(R.id.order_history_list);
                     listView2.setAdapter(adapter2);
 
