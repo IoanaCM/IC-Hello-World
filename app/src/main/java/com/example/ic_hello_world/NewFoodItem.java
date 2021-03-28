@@ -23,6 +23,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Calendar;
+
 public class NewFoodItem extends AppCompatActivity {
 
     private Button mHomeButton;
@@ -62,7 +64,7 @@ public class NewFoodItem extends AppCompatActivity {
         mDate = (CalendarView) findViewById(R.id.calendarView);
 
         mPost = (Button) findViewById(R.id.submitFood);
-
+        final long[] time = new long[1];
 
         mPost.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,7 +73,7 @@ public class NewFoodItem extends AppCompatActivity {
                 testAddItem addItem = new testAddItem(user_id);
                 final String name = mName.getText().toString();
                 final String price = "£" + mPrice.getText().toString();
-                final long date = mDate.getDate();
+                final long date = time[0];
                 addItem.writeNewItem(name, price, date);
                 Intent intent = new Intent(NewFoodItem.this, MainActivity.class);
 
@@ -84,6 +86,18 @@ public class NewFoodItem extends AppCompatActivity {
 //                databaseReference.child("items").child(user_id).child("someItem").child("expires").setValue("date");
 //                databaseReference.child("items").child(user_id).child("someItem").child("quantity").setValue(2);
                 return;
+            }
+        });
+
+
+
+        mDate.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            //show the selected date as a toast
+            @Override
+            public void onSelectedDayChange(CalendarView view, int year, int month, int day) {
+                Calendar c = Calendar.getInstance();
+                c.set(year, month, day);
+                time[0] = c.getTimeInMillis();
             }
         });
 
