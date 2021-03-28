@@ -11,7 +11,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class ItemAdapter extends ArrayAdapter<Item> {
 
@@ -37,10 +39,12 @@ public class ItemAdapter extends ArrayAdapter<Item> {
         nameTextView.setText(currentItem.getName());
 
         TextView priceTextView = (TextView) listItemView.findViewById(R.id.item_price);
-        priceTextView.setText(currentItem.getPrice());
+        priceTextView.setText("Price:\n" + currentItem.getPrice());
 
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         TextView dateTextView = (TextView) listItemView.findViewById(R.id.item_date);
-        dateTextView.setText(currentItem.getDate().toString());
+        String selectedDate = sdf.format(new Date(currentItem.getDate()));
+        dateTextView.setText("Expiry Date:\n" + selectedDate);
 
 
         return listItemView;

@@ -60,6 +60,11 @@ public class NewFoodItem extends AppCompatActivity {
                 final String price = mPrice.getText().toString();
                 final long date = mDate.getDate();
                 addItem.writeNewItem(name, price, date);
+                Intent intent = new Intent(NewFoodItem.this, MainActivity.class);
+
+                startActivity(intent);
+                finish();
+
 //                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 //                String user_id = mAuth.getCurrentUser().getUid();
 //                DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
@@ -68,7 +73,6 @@ public class NewFoodItem extends AppCompatActivity {
                 return;
             }
         });
-
 
     }
 
