@@ -27,7 +27,7 @@
             android:background="#A1F6DC"
             android:fontFamily="sans-serif-black"
             android:gravity="center_horizontal|fill_vertical"
-            android:text="@string/less_waste"
+            android:text="Halls Market"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
             android:textColor="#000000"
             android:textSize="25sp"
