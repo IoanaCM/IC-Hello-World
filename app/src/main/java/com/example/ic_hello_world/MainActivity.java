@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        
+
         getSupportActionBar().hide();
 
         mLogOut = (Button) findViewById(R.id.log_out);
@@ -91,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
                             item.setDate(Long.valueOf(product.child("expires").getValue().toString()));
                             item.setName(product.getKey());
                             item.setPrice(product.child("price").getValue().toString());
+                            item.setUuidBuyer(product.child("bought-by").getValue().toString());
                             userItem.addItem(item);
                         }
                         result.add(userItem);
@@ -103,7 +104,6 @@ public class MainActivity extends AppCompatActivity {
                     for(UserItem user : result) {
                         if(!user_id.equals(user.getUUID())) {
                             for (Item item : user.getItems()) {
-                                //add item details to view
                                 if(item.getUuidBuyer().equals("") || item.getUuidBuyer() == null){
                                     items.add(item);
                                 }

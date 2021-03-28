@@ -62,6 +62,7 @@ private Context context = this;
                             item.setDate(Long.valueOf(product.child("expires").getValue().toString()));
                             item.setName(product.getKey());
                             item.setPrice(product.child("price").getValue().toString());
+                            item.setUuidBuyer(product.child("bought-by").getValue().toString());
                             userItem.addItem(item);
                         }
                         result.add(userItem);
