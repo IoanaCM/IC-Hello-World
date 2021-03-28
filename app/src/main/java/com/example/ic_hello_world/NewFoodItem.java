@@ -25,6 +25,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class NewFoodItem extends AppCompatActivity {
 
+    private Button mHomeButton;
     private Button mPost;
     private TextView mName, mPrice;
     private CalendarView mDate;
@@ -43,7 +44,17 @@ public class NewFoodItem extends AppCompatActivity {
         getSupportActionBar().hide();
 
 
+        mHomeButton = (Button) findViewById(R.id.returnHome);
+        mHomeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(NewFoodItem.this, MainActivity.class);
 
+                startActivity(intent);
+                finish();
+                return;
+            }
+        });
         mAuth = FirebaseAuth.getInstance();
 
         mName = (TextView) findViewById(R.id.foodName);
