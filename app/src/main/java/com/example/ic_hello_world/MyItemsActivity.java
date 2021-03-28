@@ -97,6 +97,7 @@ private Context context = this;
                     }
 
                     ArrayList<Item> my_pantry = new ArrayList<>();
+                    ArrayList<Item> order_history = new ArrayList<>();
 
                     String user_id = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
@@ -108,13 +109,19 @@ private Context context = this;
                             }
                         }
                     }
+                    order_history = my_pantry;
 
                     ItemAdapter adapter1 = new ItemAdapter(context,my_pantry,R.layout.list_item2, buttonContext, MyItemsActivity.this);
                     ListView listView1 = (ListView) findViewById(R.id.my_pantry_list);
                     listView1.setAdapter(adapter1);
 
+                    ItemAdapter adapter2 = new ItemAdapter(context,my_pantry,R.layout.list_item3, buttonContext, MyItemsActivity.this);
+                    ListView listView2 = (ListView) findViewById(R.id.order_history_list);
+                    listView2.setAdapter(adapter2);
+
                 }
     }
+
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
