@@ -1,7 +1,9 @@
 package com.example.ic_hello_world;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -25,7 +27,7 @@ public class MyItemsActivity extends AppCompatActivity {
 
     private final Map<Button, Item> buttonContext = new HashMap<>();
 
-
+private Button mAddItem;
 private Context context = this;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +46,18 @@ private Context context = this;
         //ListView listView2 = (ListView) findViewById(R.id.order_history_list);
 
         //listView2.setAdapter(adapter2);
+
+        mAddItem = (Button) findViewById(R.id.add_item);
+        mAddItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                Intent intent = new Intent(MyItemsActivity.this, NewFoodItem.class);
+
+                startActivity(intent);
+                finish();
+                return;
+            }});
 
         final DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
 

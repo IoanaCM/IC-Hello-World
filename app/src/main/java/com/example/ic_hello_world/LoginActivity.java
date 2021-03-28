@@ -93,11 +93,11 @@ public class LoginActivity extends AppCompatActivity {
 
 
 
-    @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return true;
-    }
+//    @Override
+//    public boolean onSupportNavigateUp() {
+//        onBackPressed();
+//        return true;
+//    }
 
     @Override
     protected void onStart() {

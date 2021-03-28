@@ -6,7 +6,7 @@ public class Item {
     private Long date;
     private String price;
     private String uuidOwner;
-    private String uuidBuyer;
+    private String uuidBuyer ="";
 
     public Item(String uuidOwner){
         this.uuidOwner = uuidOwner;
