@@ -5,58 +5,86 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:id="@+id/my_pantry_textView"
-        android:layout_width="411dp"
-        android:layout_height="37dp"
-        android:layout_marginTop="20dp"
-        android:background="#A1F6DC"
-        android:gravity="center_horizontal|fill_vertical"
-        android:text="My pantry"
-        android:textColor="#000000"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title" />
+<!--    <ScrollView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        tools:layout_editor_absoluteX="101dp"-->
+<!--        tools:layout_editor_absoluteY="221dp">-->
 
-    <ListView
-        android:id="@+id/my_pantry_list"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="247dp"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/order_history_textView"
-        app:layout_constraintTop_toBottomOf="@+id/my_pantry_textView"
-        tools:context="com.example.IC-hello-world.MyItemsActivity"
-        tools:ignore="MissingConstraints" />
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="-55dp">
+
+        <TextView
+            android:id="@+id/my_pantry_textView"
+            android:layout_width="411dp"
+            android:layout_height="37dp"
+            android:background="#FFFFFF"
+            android:gravity="center_horizontal|fill_vertical"
+            android:text="My pantry"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ListView
+            android:id="@+id/my_pantry_list"
+            android:layout_width="match_parent"
+            android:layout_height="247dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@+id/order_history_textView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/my_pantry_textView"
+            tools:context="com.example.IC-hello-world.MyItemsActivity"
+            tools:ignore="MissingConstraints" />
 
 
-    <TextView
-        android:id="@+id/order_history_textView"
-        android:layout_width="411dp"
-        android:layout_height="37dp"
-        android:background="#A1F6DC"
-        android:gravity="center_horizontal|fill_vertical"
-        android:text="My order history"
-        android:textColor="#000000"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="329dp"
-        tools:ignore="MissingConstraints" />
+        <TextView
+            android:id="@+id/order_history_textView"
+            android:layout_width="411dp"
+            android:layout_height="37dp"
+            android:layout_marginTop="10dp"
+            android:background="#FFFFFF"
+            android:gravity="center_horizontal|fill_vertical"
+            android:text="My order history"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@id/my_pantry_list"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteY="347dp" />
 
-    <ListView
-        android:id="@+id/order_history_list"
-        android:layout_width="match_parent"
-        android:layout_height="247dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/order_history_textView"
-        tools:context="com.example.IC-hello-world.MyItemsActivity"
-        tools:layout_editor_absoluteX="0dp" />
+        <ListView
+            android:id="@+id/order_history_list"
+            android:layout_width="match_parent"
+            android:layout_height="166dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/order_history_textView"
+            tools:context="com.example.IC-hello-world.MyItemsActivity" />
+
+        <Button
+            android:id="@+id/add_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/add_item"
+            app:layout_constraintStart_toEndOf="@id/order_history_list"
+            tools:layout_editor_absoluteY="16dp" />
+    </LinearLayout>
+    <!--    </ScrollView>-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

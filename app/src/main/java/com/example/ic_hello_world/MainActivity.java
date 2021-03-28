@@ -28,7 +28,6 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private Button mLogOut;
-    private Button mAddItem;
     private Button mMyItems;
 
     private FirebaseAuth mAuth;
@@ -55,17 +54,7 @@ public class MainActivity extends AppCompatActivity {
                 finish();
                 return;
                             }});
-            mAddItem = (Button) findViewById(R.id.add_item);
-        mAddItem.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(MainActivity.this, NewFoodItem.class);
 
-                    startActivity(intent);
-                    finish();
-                    return;
-                }
-        });
         mMyItems = (Button) findViewById(R.id.my_items);
         mMyItems.setOnClickListener(new View.OnClickListener() {
             @Override

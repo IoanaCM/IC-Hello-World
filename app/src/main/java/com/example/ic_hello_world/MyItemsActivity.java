@@ -1,7 +1,10 @@
 package com.example.ic_hello_world;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
@@ -20,6 +23,7 @@ import java.util.List;
 
 public class MyItemsActivity extends AppCompatActivity {
 
+    private Button mAddItem;
 
 private Context context = this;
     @Override
@@ -27,8 +31,19 @@ private Context context = this;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_myitems);
 
+        mAddItem = (Button) findViewById(R.id.add_item);
+        mAddItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MyItemsActivity.this, NewFoodItem.class);
+
+                startActivity(intent);
+                finish();
+                return;
+            }
+        });
+
         ArrayList<Item> order_history = new ArrayList<>();
-        order_history.add(new Item("cake",1213232,"12"));
 
         ItemAdapter adapter2 = new ItemAdapter(this,order_history,R.layout.list_item2);
 
