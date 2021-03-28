@@ -20,11 +20,14 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title" />
+
     <ListView
         android:id="@+id/my_pantry_list"
         android:layout_width="match_parent"
         android:layout_height="247dp"
         android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/order_history_textView"
+        app:layout_constraintTop_toBottomOf="@+id/my_pantry_textView"
         tools:context="com.example.IC-hello-world.MyItemsActivity"
         tools:ignore="MissingConstraints" />
 
@@ -51,7 +54,7 @@
         android:layout_height="247dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/my_pantry_list"
+        app:layout_constraintTop_toBottomOf="@+id/order_history_textView"
         tools:context="com.example.IC-hello-world.MyItemsActivity"
         tools:layout_editor_absoluteX="0dp" />
 
