@@ -66,17 +66,17 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
         });
-//        mMyItems = (Button) findViewById(R.id.my_items);
-//        mMyItems.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(MainActivity.this, MyItemsActivity.class);
-//
-//                startActivity(intent);
-//                finish();
-//                return;
-//            }
-//        });
+        mMyItems = (Button) findViewById(R.id.my_items);
+        mMyItems.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, MyItemsActivity.class);
+
+                startActivity(intent);
+                finish();
+                return;
+            }
+        });
 
         //
 
@@ -115,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
 
-                    ItemAdapter adapter = new ItemAdapter(theContext,items);
+                    ItemAdapter adapter = new ItemAdapter(theContext,items,R.layout.list_item);
                     ListView listView = (ListView) findViewById(R.id.items_list);
 
 
