@@ -3,10 +3,12 @@ package com.example.ic_hello_world;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -31,11 +33,15 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
 
+    private Context theContext = this;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
 
         mLogOut = (Button) findViewById(R.id.log_out);
         mLogOut.setOnClickListener(new View.OnClickListener() {
@@ -83,11 +89,21 @@ public class MainActivity extends AppCompatActivity {
                         }
                         result.add(userItem);
                     }
+
+                    final ArrayList<Item> items = new ArrayList<Item>();
+
+
                     for(UserItem user : result) {
                         for (Item item : user.getItems()) {
                             //add item details to view
+                            items.add(item);
                         }
                     }
+
+                    ItemAdapter adapter = new ItemAdapter(theContext,items);
+                    ListView listView = (ListView) findViewById(R.id.items_list);
+
+                    listView.setAdapter(adapter);
 
                 }
             }

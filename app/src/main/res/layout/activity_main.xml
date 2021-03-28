@@ -55,7 +55,7 @@
             android:layout_height="wrap_content"
             android:text="@string/log_out"
             android:layout_marginTop="10dp"
-            android:layout_marginButtom="0dp"
+            android:layout_marginBottom="0dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.924"
             app:layout_constraintStart_toEndOf="@+id/add_item"
@@ -82,13 +82,19 @@
             android:gravity="center_horizontal|fill_vertical"
             android:text="@string/available_food"
             android:textColor="#000000"
-            android:textSize="21sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/title" />
 
+        <ListView
+            android:id="@+id/items_list"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context="com.example.IC-hello-world.MainActivity" />
 
     </LinearLayout>
     </ScrollView>
