@@ -84,8 +84,13 @@ private Context context = this;
                             System.out.println(product.child("expires").getValue());
                             item.setDate(Long.valueOf(product.child("expires").getValue().toString()));
                             item.setName(product.getKey());
-                            item.setPrice(product.child("price").getValue().toString());
                             item.setUuidBuyer(product.child("bought-by").getValue().toString());
+                            if(item.getUuidBuyer().equals("")) {
+                                item.setPrice(product.child("price").getValue().toString());
+                            } else{
+                                item.setPrice("SOLD");
+                            }
+
                             userItem.addItem(item);
                         }
                         result.add(userItem);
