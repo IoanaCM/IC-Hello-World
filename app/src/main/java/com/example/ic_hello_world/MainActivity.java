@@ -59,9 +59,6 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
         });
-        Queries queries = new Queries();
-        List<UserItem> test = queries.getItems();
-        System.out.println(test);
 
     }
 

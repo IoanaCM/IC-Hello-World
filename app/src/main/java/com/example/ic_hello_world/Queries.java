@@ -12,16 +12,15 @@ import java.util.List;
 
 public class Queries {
 
-    final List<UserItem> result = new ArrayList<>();
-
-    public List<UserItem> getItems() {
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
+    public synchronized void getItems() {
+        final DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
 
         Query query = reference.child("items");
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public synchronized void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
+                    List<UserItem> result = new ArrayList<>();
                     for (DataSnapshot uuid : dataSnapshot.getChildren()) {
                         System.out.println(uuid.getKey());
                         UserItem userItem = new UserItem(uuid.getKey());
@@ -35,6 +34,9 @@ public class Queries {
                         }
                         result.add(userItem);
                     }
+                    //Do rendering to screen
+                    System.out.println(result);
+
                 }
             }
 
@@ -43,7 +45,6 @@ public class Queries {
 
             }
         });
-        return result;
     }
 
 
