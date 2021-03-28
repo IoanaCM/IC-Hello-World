@@ -3,6 +3,7 @@ package com.example.ic_hello_world;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -45,7 +46,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        View decorView = getWindow().getDecorView();
+        // Hide the status bar.
+                int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
+                decorView.setSystemUiVisibility(uiOptions);
+        // Remember that you should never show the action bar if the
+        // status bar is hidden, so hide that too if necessary.
+                ActionBar actionBar = getActionBar();
+                actionBar.hide();
 
         mLogOut = (Button) findViewById(R.id.log_out);
         mLogOut.setOnClickListener(new View.OnClickListener() {
