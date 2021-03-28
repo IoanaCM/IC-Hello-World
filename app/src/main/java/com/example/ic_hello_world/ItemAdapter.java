@@ -1,6 +1,7 @@
 package com.example.ic_hello_world;
 
 import android.content.Context;
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,16 +12,21 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 
+import org.xmlpull.v1.XmlPullParser;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
 public class ItemAdapter extends ArrayAdapter<Item> {
 
+    private int tileLayout;
 
-    public ItemAdapter(Context context, ArrayList<Item> items)
+
+    public ItemAdapter(Context context, ArrayList<Item> items,int tileLayout)
     {
         super(context,0,items);
+        this.tileLayout = tileLayout;
     }
 
     @NonNull
@@ -30,7 +36,7 @@ public class ItemAdapter extends ArrayAdapter<Item> {
         View listItemView = convertView;
         if(listItemView==null)
         {
-            listItemView = LayoutInflater.from(getContext()).inflate(R.layout.list_item, parent, false);
+            listItemView = LayoutInflater.from(getContext()).inflate(tileLayout, parent, false);
         }
 
         Item currentItem = getItem(position);

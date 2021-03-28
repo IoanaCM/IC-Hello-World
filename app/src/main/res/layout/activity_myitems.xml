@@ -5,13 +5,47 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <TextView
+        android:id="@+id/my_pantry_textView"
+        android:layout_width="411dp"
+        android:layout_height="37dp"
+        android:layout_marginTop="20dp"
+        android:background="#A1F6DC"
+        android:gravity="center_horizontal|fill_vertical"
+        android:text="My pantry"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title" />
 
     <ListView
         android:id="@+id/my_pantry_list"
         android:layout_width="match_parent"
         android:layout_height="247dp"
         android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/order_history_textView"
+        app:layout_constraintTop_toBottomOf="@+id/my_pantry_textView"
         tools:context="com.example.IC-hello-world.MyItemsActivity"
+        tools:ignore="MissingConstraints" />
+
+
+    <TextView
+        android:id="@+id/order_history_textView"
+        android:layout_width="411dp"
+        android:layout_height="37dp"
+        android:background="#A1F6DC"
+        android:gravity="center_horizontal|fill_vertical"
+        android:text="My order history"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="329dp"
         tools:ignore="MissingConstraints" />
 
     <ListView
@@ -20,7 +54,7 @@
         android:layout_height="247dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/my_pantry_list"
+        app:layout_constraintTop_toBottomOf="@+id/order_history_textView"
         tools:context="com.example.IC-hello-world.MyItemsActivity"
         tools:layout_editor_absoluteX="0dp" />
 
