@@ -60,6 +60,49 @@ public class MainActivity extends AppCompatActivity {
                 }
         });
 
+        //
+
+        final DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
+
+        Query query = reference.child("items");
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public synchronized void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    List<UserItem> result = new ArrayList<>();
+                    for (DataSnapshot uuid : dataSnapshot.getChildren()) {
+                        System.out.println(uuid.getKey());
+                        UserItem userItem = new UserItem(uuid.getKey());
+                        for (DataSnapshot product : uuid.getChildren()) {
+                            Item item = new Item();
+                            System.out.println(product.child("expires").getValue());
+                            item.setDate(Long.valueOf(product.child("expires").getValue().toString()));
+                            item.setName(product.getKey());
+                            item.setPrice(product.child("price").getValue().toString());
+                            userItem.addItem(item);
+                        }
+                        result.add(userItem);
+                    }
+                    for(UserItem user : result) {
+                        for (Item item : user.getItems()) {
+                            //add item details to view
+                        }
+                    }
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+
+        //
+
+
     }
 
 
