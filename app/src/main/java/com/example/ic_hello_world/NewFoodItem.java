@@ -40,6 +40,8 @@ public class NewFoodItem extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        getSupportActionBar().hide();
+
 
 
         mAuth = FirebaseAuth.getInstance();

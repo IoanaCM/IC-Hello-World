@@ -14,6 +14,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import org.xmlpull.v1.XmlPullParser;
 
 import java.text.SimpleDateFormat;
@@ -65,6 +67,18 @@ public class ItemAdapter extends ArrayAdapter<Item> {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                System.out.println(button.getText());
+                if(button.getText().equals("Get")) {
+                    String user_id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                    FirebaseQuery query = new FirebaseQuery(user_id,buttonContext.get(button).getUuidOwner());
+                    query.buyItem(buttonContext.get(button).getName());
+
+                } else if(button.getText().equals("Delete")) {
+                    String user_id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                    FirebaseQuery query = new FirebaseQuery(user_id,buttonContext.get(button).getUuidOwner());
+                    query.deleteItem(buttonContext.get(button).getName());
+                }
+
                 System.out.println(buttonContext.get(button).getName());
                 return;
             }

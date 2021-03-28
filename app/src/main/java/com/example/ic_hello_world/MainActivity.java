@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        getSupportActionBar().hide();
 
         mLogOut = (Button) findViewById(R.id.log_out);
         mLogOut.setOnClickListener(new View.OnClickListener() {

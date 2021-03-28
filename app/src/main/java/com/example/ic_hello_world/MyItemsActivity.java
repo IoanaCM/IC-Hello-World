@@ -32,6 +32,8 @@ private Context context = this;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_myitems);
 
+        getSupportActionBar().hide();
+
 
 
         //ArrayList<Item> order_history = new ArrayList<>();

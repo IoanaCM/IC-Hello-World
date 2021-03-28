@@ -9,9 +9,6 @@ public class Item {
     private String uuidBuyer;
 
     public Item(String uuidOwner){
-//        this.name = name;
-//        this.date = date;
-//        this.price = price;
         this.uuidOwner = uuidOwner;
     }
 
