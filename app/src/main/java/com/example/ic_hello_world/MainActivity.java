@@ -104,11 +104,14 @@ public class MainActivity extends AppCompatActivity {
 
                     final ArrayList<Item> items = new ArrayList<Item>();
 
+                    String user_id = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
                     for(UserItem user : result) {
-                        for (Item item : user.getItems()) {
-                            //add item details to view
-                            items.add(item);
+                        if(user_id != user.getUUID()) {
+                            for (Item item : user.getItems()) {
+                                //add item details to view
+                                items.add(item);
+                            }
                         }
                     }
 
