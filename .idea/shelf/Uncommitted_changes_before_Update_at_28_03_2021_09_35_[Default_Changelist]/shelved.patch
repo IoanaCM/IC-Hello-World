@@ -1,0 +1,397 @@
+Index: app/src/main/java/com/example/ic_hello_world/testAddItem.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.ic_hello_world;\r\n\r\nimport com.google.firebase.auth.FirebaseAuth;\r\nimport com.google.firebase.auth.FirebaseUser;\r\nimport com.google.firebase.database.DatabaseReference;\r\nimport com.google.firebase.database.FirebaseDatabase;\r\n\r\npublic class testAddItem {\r\n\r\n    private String user_id;\r\n\r\n    public testAddItem(String user_id) {\r\n        this.user_id = user_id;\r\n    }\r\n\r\n    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();\r\n\r\n    public void writeNewItem(String item, String price, Long date) {\r\n        databaseReference.child(\"items\").child(user_id).child(item).child(\"expires\").setValue(date);\r\n        databaseReference.child(\"items\").child(user_id).child(item).child(\"price\").setValue(price);\r\n        databaseReference.child(\"items\").child(user_id).child(item).child(\"bought-by\").setValue(\"null\");\r\n    }\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/ic_hello_world/testAddItem.java	(revision 0ea83bab1f64d6793f29b1239fad06ef703f5844)
++++ app/src/main/java/com/example/ic_hello_world/testAddItem.java	(date 1616920200079)
+@@ -18,7 +18,7 @@
+     public void writeNewItem(String item, String price, Long date) {
+         databaseReference.child("items").child(user_id).child(item).child("expires").setValue(date);
+         databaseReference.child("items").child(user_id).child(item).child("price").setValue(price);
+-        databaseReference.child("items").child(user_id).child(item).child("bought-by").setValue("null");
++        databaseReference.child("items").child(user_id).child(item).child("bought-by").setValue("");
+     }
+ 
+ }
+Index: app/src/main/java/com/example/ic_hello_world/ItemAdapter.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.ic_hello_world;\r\n\r\nimport android.content.Context;\r\nimport android.text.Layout;\r\nimport android.view.LayoutInflater;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\nimport android.widget.ArrayAdapter;\r\nimport android.widget.ImageView;\r\nimport android.widget.TextView;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.core.content.ContextCompat;\r\n\r\nimport org.xmlpull.v1.XmlPullParser;\r\n\r\nimport java.text.SimpleDateFormat;\r\nimport java.util.ArrayList;\r\nimport java.util.Date;\r\n\r\npublic class ItemAdapter extends ArrayAdapter<Item> {\r\n\r\n    private int tileLayout;\r\n\r\n\r\n    public ItemAdapter(Context context, ArrayList<Item> items,int tileLayout)\r\n    {\r\n        super(context,0,items);\r\n        this.tileLayout = tileLayout;\r\n    }\r\n\r\n    @NonNull\r\n    @Override\r\n    public View getView(int position, View convertView, ViewGroup parent)\r\n    {\r\n        View listItemView = convertView;\r\n        if(listItemView==null)\r\n        {\r\n            listItemView = LayoutInflater.from(getContext()).inflate(tileLayout, parent, false);\r\n        }\r\n\r\n        Item currentItem = getItem(position);\r\n\r\n        TextView nameTextView = (TextView) listItemView.findViewById(R.id.item_name);\r\n        nameTextView.setText(currentItem.getName());\r\n\r\n        TextView priceTextView = (TextView) listItemView.findViewById(R.id.item_price);\r\n        priceTextView.setText(\"Price:\\n\" + currentItem.getPrice());\r\n\r\n        SimpleDateFormat sdf = new SimpleDateFormat(\"dd/MM/yyyy\");\r\n        TextView dateTextView = (TextView) listItemView.findViewById(R.id.item_date);\r\n        String selectedDate = sdf.format(new Date(currentItem.getDate()));\r\n        dateTextView.setText(\"Expiry Date:\\n\" + selectedDate);\r\n\r\n\r\n        return listItemView;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/ic_hello_world/ItemAdapter.java	(revision 0ea83bab1f64d6793f29b1239fad06ef703f5844)
++++ app/src/main/java/com/example/ic_hello_world/ItemAdapter.java	(date 1616919876105)
+@@ -1,11 +1,13 @@
+ package com.example.ic_hello_world;
+ 
+ import android.content.Context;
++import android.content.Intent;
+ import android.text.Layout;
+ import android.view.LayoutInflater;
+ import android.view.View;
+ import android.view.ViewGroup;
+ import android.widget.ArrayAdapter;
++import android.widget.Button;
+ import android.widget.ImageView;
+ import android.widget.TextView;
+ 
+@@ -17,16 +19,21 @@
+ import java.text.SimpleDateFormat;
+ import java.util.ArrayList;
+ import java.util.Date;
++import java.util.HashMap;
++import java.util.Map;
+ 
+ public class ItemAdapter extends ArrayAdapter<Item> {
+ 
+     private int tileLayout;
+ 
++    private Map<Button, Item> buttonContext;
+ 
+-    public ItemAdapter(Context context, ArrayList<Item> items,int tileLayout)
++
++    public ItemAdapter(Context context, ArrayList<Item> items,int tileLayout, Map<Button, Item> buttonContext)
+     {
+         super(context,0,items);
+         this.tileLayout = tileLayout;
++        this.buttonContext = buttonContext;
+     }
+ 
+     @NonNull
+@@ -52,6 +59,17 @@
+         String selectedDate = sdf.format(new Date(currentItem.getDate()));
+         dateTextView.setText("Expiry Date:\n" + selectedDate);
+ 
++        final Button button = listItemView.findViewById(R.id.item_button);
++        buttonContext.put(button,currentItem);
++
++        button.setOnClickListener(new View.OnClickListener() {
++            @Override
++            public void onClick(View v) {
++                System.out.println(buttonContext.get(button).getName());
++                return;
++            }
++        });
++
+ 
+         return listItemView;
+     }
+Index: app/src/main/java/com/example/ic_hello_world/MainActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.ic_hello_world;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\nimport android.content.Context;\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.view.View;\r\nimport android.widget.Button;\r\nimport android.widget.ListView;\r\nimport android.widget.Toast;\r\n\r\nimport com.google.android.gms.tasks.OnCompleteListener;\r\nimport com.google.android.gms.tasks.Task;\r\nimport com.google.firebase.auth.AuthResult;\r\nimport com.google.firebase.auth.FirebaseAuth;\r\nimport com.google.firebase.database.DataSnapshot;\r\nimport com.google.firebase.database.DatabaseError;\r\nimport com.google.firebase.database.DatabaseReference;\r\nimport com.google.firebase.database.FirebaseDatabase;\r\nimport com.google.firebase.database.Query;\r\nimport com.google.firebase.database.ValueEventListener;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\n\r\npublic class MainActivity extends AppCompatActivity {\r\n\r\n    private Button mLogOut;\r\n    private Button mAddItem;\r\n    private Button mMyItems;\r\n\r\n    private FirebaseAuth mAuth;\r\n    private FirebaseAuth.AuthStateListener firebaseAuthListener;\r\n\r\n    private Context theContext = this;\r\n\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_main);\r\n\r\n\r\n\r\n        mLogOut = (Button) findViewById(R.id.log_out);\r\n        mLogOut.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                FirebaseAuth.getInstance().signOut();\r\n                Intent intent = new Intent(MainActivity.this, LoginActivity.class);\r\n\r\n                startActivity(intent);\r\n                finish();\r\n                return;\r\n                            }});\r\n            mAddItem = (Button) findViewById(R.id.add_item);\r\n        mAddItem.setOnClickListener(new View.OnClickListener() {\r\n                @Override\r\n                public void onClick(View v) {\r\n                    Intent intent = new Intent(MainActivity.this, NewFoodItem.class);\r\n\r\n                    startActivity(intent);\r\n                    finish();\r\n                    return;\r\n                }\r\n        });\r\n        mMyItems = (Button) findViewById(R.id.my_items);\r\n        mMyItems.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                Intent intent = new Intent(MainActivity.this, MyItemsActivity.class);\r\n\r\n                startActivity(intent);\r\n                finish();\r\n                return;\r\n            }\r\n        });\r\n\r\n        //\r\n\r\n        final DatabaseReference reference = FirebaseDatabase.getInstance().getReference();\r\n\r\n        Query query = reference.child(\"items\");\r\n        query.addListenerForSingleValueEvent(new ValueEventListener() {\r\n            @Override\r\n            public synchronized void onDataChange(DataSnapshot dataSnapshot) {\r\n                if (dataSnapshot.exists()) {\r\n                    List<UserItem> result = new ArrayList<>();\r\n                    for (DataSnapshot uuid : dataSnapshot.getChildren()) {\r\n                        System.out.println(uuid.getKey());\r\n                        UserItem userItem = new UserItem(uuid.getKey());\r\n                        for (DataSnapshot product : uuid.getChildren()) {\r\n                            Item item = new Item();\r\n                            System.out.println(product.child(\"expires\").getValue());\r\n                            item.setDate(Long.valueOf(product.child(\"expires\").getValue().toString()));\r\n                            item.setName(product.getKey());\r\n                            item.setPrice(product.child(\"price\").getValue().toString());\r\n                            userItem.addItem(item);\r\n                        }\r\n                        result.add(userItem);\r\n                    }\r\n\r\n                    final ArrayList<Item> items = new ArrayList<Item>();\r\n\r\n                    String user_id = FirebaseAuth.getInstance().getCurrentUser().getUid();\r\n\r\n                    for(UserItem user : result) {\r\n                        if(!user_id.equals(user.getUUID())) {\r\n                            for (Item item : user.getItems()) {\r\n                                //add item details to view\r\n                                items.add(item);\r\n                            }\r\n                        }\r\n                    }\r\n\r\n                    ItemAdapter adapter = new ItemAdapter(theContext,items,R.layout.list_item);\r\n                    ListView listView = (ListView) findViewById(R.id.items_list);\r\n\r\n\r\n\r\n                    listView.setAdapter(adapter);\r\n\r\n                }\r\n            }\r\n\r\n            @Override\r\n            public void onCancelled(DatabaseError databaseError) {\r\n\r\n            }\r\n        });\r\n\r\n\r\n\r\n        //\r\n\r\n\r\n    }\r\n\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/ic_hello_world/MainActivity.java	(revision 0ea83bab1f64d6793f29b1239fad06ef703f5844)
++++ app/src/main/java/com/example/ic_hello_world/MainActivity.java	(date 1616919902518)
+@@ -23,7 +23,9 @@
+ import com.google.firebase.database.ValueEventListener;
+ 
+ import java.util.ArrayList;
++import java.util.HashMap;
+ import java.util.List;
++import java.util.Map;
+ 
+ public class MainActivity extends AppCompatActivity {
+ 
+@@ -36,6 +38,8 @@
+ 
+     private Context theContext = this;
+ 
++    private Map<Button, Item> buttonContext = new HashMap<>();
++
+ 
+     @Override
+     protected void onCreate(Bundle savedInstanceState) {
+@@ -92,7 +96,7 @@
+                         System.out.println(uuid.getKey());
+                         UserItem userItem = new UserItem(uuid.getKey());
+                         for (DataSnapshot product : uuid.getChildren()) {
+-                            Item item = new Item();
++                            Item item = new Item(uuid.getKey());
+                             System.out.println(product.child("expires").getValue());
+                             item.setDate(Long.valueOf(product.child("expires").getValue().toString()));
+                             item.setName(product.getKey());
+@@ -115,7 +119,7 @@
+                         }
+                     }
+ 
+-                    ItemAdapter adapter = new ItemAdapter(theContext,items,R.layout.list_item);
++                    ItemAdapter adapter = new ItemAdapter(theContext,items,R.layout.list_item, buttonContext);
+                     ListView listView = (ListView) findViewById(R.id.items_list);
+ 
+ 
+Index: app/src/main/java/com/example/ic_hello_world/MyItemsActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.ic_hello_world;\r\n\r\nimport android.content.Context;\r\nimport android.os.Bundle;\r\nimport android.widget.ListView;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\nimport com.google.firebase.auth.FirebaseAuth;\r\nimport com.google.firebase.database.DataSnapshot;\r\nimport com.google.firebase.database.DatabaseError;\r\nimport com.google.firebase.database.DatabaseReference;\r\nimport com.google.firebase.database.FirebaseDatabase;\r\nimport com.google.firebase.database.Query;\r\nimport com.google.firebase.database.ValueEventListener;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\n\r\npublic class MyItemsActivity extends AppCompatActivity {\r\n\r\n\r\nprivate Context context = this;\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_myitems);\r\n\r\n        ArrayList<Item> order_history = new ArrayList<>();\r\n        order_history.add(new Item(\"cake\",1213232,\"12\"));\r\n\r\n        ItemAdapter adapter2 = new ItemAdapter(this,order_history,R.layout.list_item2);\r\n\r\n        ListView listView2 = (ListView) findViewById(R.id.order_history_list);\r\n\r\n        listView2.setAdapter(adapter2);\r\n\r\n        final DatabaseReference reference = FirebaseDatabase.getInstance().getReference();\r\n\r\n        Query query = reference.child(\"items\");\r\n        query.addListenerForSingleValueEvent(new ValueEventListener() {\r\n            @Override\r\n            public synchronized void onDataChange(DataSnapshot dataSnapshot) {\r\n                if (dataSnapshot.exists()) {\r\n                    List<UserItem> result = new ArrayList<>();\r\n                    for (DataSnapshot uuid : dataSnapshot.getChildren()) {\r\n                        System.out.println(uuid.getKey());\r\n                        UserItem userItem = new UserItem(uuid.getKey());\r\n                        for (DataSnapshot product : uuid.getChildren()) {\r\n                            Item item = new Item();\r\n                            System.out.println(product.child(\"expires\").getValue());\r\n                            item.setDate(Long.valueOf(product.child(\"expires\").getValue().toString()));\r\n                            item.setName(product.getKey());\r\n                            item.setPrice(product.child(\"price\").getValue().toString());\r\n                            userItem.addItem(item);\r\n                        }\r\n                        result.add(userItem);\r\n                    }\r\n\r\n                    ArrayList<Item> my_pantry = new ArrayList<>();\r\n\r\n                    String user_id = FirebaseAuth.getInstance().getCurrentUser().getUid();\r\n\r\n                    for(UserItem user : result) {\r\n                        if(user_id.equals(user.getUUID())) {\r\n                            for (Item item : user.getItems()) {\r\n                                //add item details to view\r\n                                my_pantry.add(item);\r\n                            }\r\n                        }\r\n                    }\r\n\r\n                    ItemAdapter adapter1 = new ItemAdapter(context,my_pantry,R.layout.list_item2);\r\n                    ListView listView1 = (ListView) findViewById(R.id.my_pantry_list);\r\n                    listView1.setAdapter(adapter1);\r\n\r\n                }\r\n    }\r\n\r\n            @Override\r\n            public void onCancelled(@NonNull DatabaseError error) {\r\n\r\n            }\r\n        });}}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/ic_hello_world/MyItemsActivity.java	(revision 0ea83bab1f64d6793f29b1239fad06ef703f5844)
++++ app/src/main/java/com/example/ic_hello_world/MyItemsActivity.java	(date 1616919966282)
+@@ -2,6 +2,7 @@
+ 
+ import android.content.Context;
+ import android.os.Bundle;
++import android.widget.Button;
+ import android.widget.ListView;
+ 
+ import androidx.annotation.NonNull;
+@@ -16,10 +17,14 @@
+ import com.google.firebase.database.ValueEventListener;
+ 
+ import java.util.ArrayList;
++import java.util.HashMap;
+ import java.util.List;
++import java.util.Map;
+ 
+ public class MyItemsActivity extends AppCompatActivity {
+ 
++    private final Map<Button, Item> buttonContext = new HashMap<>();
++
+ 
+ private Context context = this;
+     @Override
+@@ -27,14 +32,16 @@
+         super.onCreate(savedInstanceState);
+         setContentView(R.layout.activity_myitems);
+ 
+-        ArrayList<Item> order_history = new ArrayList<>();
+-        order_history.add(new Item("cake",1213232,"12"));
++
+ 
+-        ItemAdapter adapter2 = new ItemAdapter(this,order_history,R.layout.list_item2);
++        //ArrayList<Item> order_history = new ArrayList<>();
++        //order_history.add(new Item("cake",1213232,"12"));
+ 
+-        ListView listView2 = (ListView) findViewById(R.id.order_history_list);
++        //ItemAdapter adapter2 = new ItemAdapter(this,order_history,R.layout.list_item2);
+ 
+-        listView2.setAdapter(adapter2);
++        //ListView listView2 = (ListView) findViewById(R.id.order_history_list);
++
++        //listView2.setAdapter(adapter2);
+ 
+         final DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
+ 
+@@ -48,7 +55,7 @@
+                         System.out.println(uuid.getKey());
+                         UserItem userItem = new UserItem(uuid.getKey());
+                         for (DataSnapshot product : uuid.getChildren()) {
+-                            Item item = new Item();
++                            Item item = new Item(uuid.getKey());
+                             System.out.println(product.child("expires").getValue());
+                             item.setDate(Long.valueOf(product.child("expires").getValue().toString()));
+                             item.setName(product.getKey());
+@@ -71,7 +78,7 @@
+                         }
+                     }
+ 
+-                    ItemAdapter adapter1 = new ItemAdapter(context,my_pantry,R.layout.list_item2);
++                    ItemAdapter adapter1 = new ItemAdapter(context,my_pantry,R.layout.list_item2, buttonContext);
+                     ListView listView1 = (ListView) findViewById(R.id.my_pantry_list);
+                     listView1.setAdapter(adapter1);
+ 
+Index: app/src/main/java/com/example/ic_hello_world/Item.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.ic_hello_world;\r\n\r\npublic class Item {\r\n\r\n    private String name;\r\n    private Long date;\r\n    private String price;\r\n    private Boolean sold = false;\r\n\r\n    public Item(){}\r\n    public Item(String name, long date,String price){\r\n        this.name = name;\r\n        this.date = date;\r\n        this.price = price;\r\n    }\r\n\r\n    public Item(String name, long date,String price,boolean sold){\r\n        this.name = name;\r\n        this.date = date;\r\n        this.price = price;\r\n        this.sold = sold;\r\n    }\r\n\r\n    public String getName() {\r\n        return name;\r\n    }\r\n\r\n    public Long getDate() {\r\n        return date;\r\n    }\r\n\r\n    public String getPrice() {\r\n        return price;\r\n    }\r\n\r\n    public Boolean getSold() {\r\n        return sold;\r\n    }\r\n\r\n    public void setName(String name) {\r\n        this.name = name;\r\n    }\r\n\r\n    public void setDate(Long date) {\r\n        this.date = date;\r\n    }\r\n\r\n    public void setPrice(String price) {\r\n        this.price = price;\r\n    }\r\n\r\n    public void setSold(boolean sold){this.sold = sold;}\r\n\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/ic_hello_world/Item.java	(revision 0ea83bab1f64d6793f29b1239fad06ef703f5844)
++++ app/src/main/java/com/example/ic_hello_world/Item.java	(date 1616919466699)
+@@ -5,21 +5,16 @@
+     private String name;
+     private Long date;
+     private String price;
+-    private Boolean sold = false;
++    private String uuidOwner;
++    private String uuidBuyer;
+ 
+-    public Item(){}
+-    public Item(String name, long date,String price){
+-        this.name = name;
+-        this.date = date;
+-        this.price = price;
++    public Item(String uuidOwner){
++//        this.name = name;
++//        this.date = date;
++//        this.price = price;
++        this.uuidOwner = uuidOwner;
+     }
+ 
+-    public Item(String name, long date,String price,boolean sold){
+-        this.name = name;
+-        this.date = date;
+-        this.price = price;
+-        this.sold = sold;
+-    }
+ 
+     public String getName() {
+         return name;
+@@ -33,10 +28,6 @@
+         return price;
+     }
+ 
+-    public Boolean getSold() {
+-        return sold;
+-    }
+-
+     public void setName(String name) {
+         this.name = name;
+     }
+@@ -49,7 +40,15 @@
+         this.price = price;
+     }
+ 
+-    public void setSold(boolean sold){this.sold = sold;}
++    public String getUuidOwner() {
++        return uuidOwner;
++    }
+ 
++    public String getUuidBuyer() {
++        return uuidBuyer;
++    }
+ 
++    public void setUuidBuyer(String uuidBuyer) {
++        this.uuidBuyer = uuidBuyer;
++    }
+ }
+Index: app/src/main/java/com/example/ic_hello_world/Queries.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.ic_hello_world;\r\n\r\nimport com.google.firebase.database.DataSnapshot;\r\nimport com.google.firebase.database.DatabaseError;\r\nimport com.google.firebase.database.DatabaseReference;\r\nimport com.google.firebase.database.FirebaseDatabase;\r\nimport com.google.firebase.database.Query;\r\nimport com.google.firebase.database.ValueEventListener;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\n\r\npublic class Queries {\r\n\r\n    public synchronized void getItems() {\r\n        final DatabaseReference reference = FirebaseDatabase.getInstance().getReference();\r\n\r\n        Query query = reference.child(\"items\");\r\n        query.addListenerForSingleValueEvent(new ValueEventListener() {\r\n            @Override\r\n            public synchronized void onDataChange(DataSnapshot dataSnapshot) {\r\n                if (dataSnapshot.exists()) {\r\n                    List<UserItem> result = new ArrayList<>();\r\n                    for (DataSnapshot uuid : dataSnapshot.getChildren()) {\r\n                        System.out.println(uuid.getKey());\r\n                        UserItem userItem = new UserItem(uuid.getKey());\r\n                        for (DataSnapshot product : uuid.getChildren()) {\r\n                            Item item = new Item();\r\n                            System.out.println(product.child(\"expires\").getValue());\r\n                            item.setDate(Long.valueOf(product.child(\"expires\").getValue().toString()));\r\n                            item.setName(product.getKey());\r\n                            item.setPrice(product.child(\"price\").getValue().toString());\r\n                            userItem.addItem(item);\r\n                        }\r\n                        result.add(userItem);\r\n                    }\r\n                    //Do rendering to screen\r\n                    System.out.println(result);\r\n\r\n                }\r\n            }\r\n\r\n            @Override\r\n            public void onCancelled(DatabaseError databaseError) {\r\n\r\n            }\r\n        });\r\n    }\r\n\r\n\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/ic_hello_world/Queries.java	(revision 0ea83bab1f64d6793f29b1239fad06ef703f5844)
++++ app/src/main/java/com/example/ic_hello_world/Queries.java	(date 1616919720735)
+@@ -1,52 +1,52 @@
+-package com.example.ic_hello_world;
+-
+-import com.google.firebase.database.DataSnapshot;
+-import com.google.firebase.database.DatabaseError;
+-import com.google.firebase.database.DatabaseReference;
+-import com.google.firebase.database.FirebaseDatabase;
+-import com.google.firebase.database.Query;
+-import com.google.firebase.database.ValueEventListener;
+-
+-import java.util.ArrayList;
+-import java.util.List;
+-
+-public class Queries {
+-
+-    public synchronized void getItems() {
+-        final DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
+-
+-        Query query = reference.child("items");
+-        query.addListenerForSingleValueEvent(new ValueEventListener() {
+-            @Override
+-            public synchronized void onDataChange(DataSnapshot dataSnapshot) {
+-                if (dataSnapshot.exists()) {
+-                    List<UserItem> result = new ArrayList<>();
+-                    for (DataSnapshot uuid : dataSnapshot.getChildren()) {
+-                        System.out.println(uuid.getKey());
+-                        UserItem userItem = new UserItem(uuid.getKey());
+-                        for (DataSnapshot product : uuid.getChildren()) {
+-                            Item item = new Item();
+-                            System.out.println(product.child("expires").getValue());
+-                            item.setDate(Long.valueOf(product.child("expires").getValue().toString()));
+-                            item.setName(product.getKey());
+-                            item.setPrice(product.child("price").getValue().toString());
+-                            userItem.addItem(item);
+-                        }
+-                        result.add(userItem);
+-                    }
+-                    //Do rendering to screen
+-                    System.out.println(result);
+-
+-                }
+-            }
+-
+-            @Override
+-            public void onCancelled(DatabaseError databaseError) {
+-
+-            }
+-        });
+-    }
+-
+-
+-
+-}
++//package com.example.ic_hello_world;
++//
++//import com.google.firebase.database.DataSnapshot;
++//import com.google.firebase.database.DatabaseError;
++//import com.google.firebase.database.DatabaseReference;
++//import com.google.firebase.database.FirebaseDatabase;
++//import com.google.firebase.database.Query;
++//import com.google.firebase.database.ValueEventListener;
++//
++//import java.util.ArrayList;
++//import java.util.List;
++//
++//public class Queries {
++//
++//    public synchronized void getItems() {
++//        final DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
++//
++//        Query query = reference.child("items");
++//        query.addListenerForSingleValueEvent(new ValueEventListener() {
++//            @Override
++//            public synchronized void onDataChange(DataSnapshot dataSnapshot) {
++//                if (dataSnapshot.exists()) {
++//                    List<UserItem> result = new ArrayList<>();
++//                    for (DataSnapshot uuid : dataSnapshot.getChildren()) {
++//                        System.out.println(uuid.getKey());
++//                        UserItem userItem = new UserItem(uuid.getKey());
++//                        for (DataSnapshot product : uuid.getChildren()) {
++//                            Item item = new Item();
++//                            System.out.println(product.child("expires").getValue());
++//                            item.setDate(Long.valueOf(product.child("expires").getValue().toString()));
++//                            item.setName(product.getKey());
++//                            item.setPrice(product.child("price").getValue().toString());
++//                            userItem.addItem(item);
++//                        }
++//                        result.add(userItem);
++//                    }
++//                    //Do rendering to screen
++//                    System.out.println(result);
++//
++//                }
++//            }
++//
++//            @Override
++//            public void onCancelled(DatabaseError databaseError) {
++//
++//            }
++//        });
++//    }
++//
++//
++//
++//}
+Index: .idea/gradle.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"GradleMigrationSettings\" migrationVersion=\"1\" />\r\n  <component name=\"GradleSettings\">\r\n    <option name=\"linkedExternalProjectsSettings\">\r\n      <GradleProjectSettings>\r\n        <option name=\"testRunner\" value=\"PLATFORM\" />\r\n        <option name=\"distributionType\" value=\"DEFAULT_WRAPPED\" />\r\n        <option name=\"externalProjectPath\" value=\"$PROJECT_DIR$\" />\r\n        <option name=\"gradleJvm\" value=\"1.8\" />\r\n        <option name=\"modules\">\r\n          <set>\r\n            <option value=\"$PROJECT_DIR$\" />\r\n            <option value=\"$PROJECT_DIR$/app\" />\r\n          </set>\r\n        </option>\r\n        <option name=\"resolveModulePerSourceSet\" value=\"false\" />\r\n      </GradleProjectSettings>\r\n    </option>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/gradle.xml	(revision 0ea83bab1f64d6793f29b1239fad06ef703f5844)
++++ .idea/gradle.xml	(date 1616919019818)
+@@ -15,6 +15,7 @@
+           </set>
+         </option>
+         <option name="resolveModulePerSourceSet" value="false" />
++        <option name="useQualifiedModuleNames" value="true" />
+       </GradleProjectSettings>
+     </option>
+   </component>

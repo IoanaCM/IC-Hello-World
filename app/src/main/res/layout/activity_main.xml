@@ -75,12 +75,12 @@
             tools:context="com.example.IC-hello-world.MainActivity" />
 
         <Button
-            android:id="@+id/add_item"
+            android:id="@+id/my_items"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="0dp"
             android:layout_marginTop="20dp"
-            android:text="@string/add_item"
+            android:text="My items"
             app:layout_constraintStart_toStartOf="parent"
             tools:ignore="MissingConstraints"
             tools:layout_editor_absoluteY="16dp" />
@@ -98,11 +98,6 @@
             tools:ignore="MissingConstraints"
             tools:layout_editor_absoluteY="16dp" />
 
-        <Button
-            android:id="@+id/my_items"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="My Items" />
 
 
     </LinearLayout>

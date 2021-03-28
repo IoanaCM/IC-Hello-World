@@ -5,18 +5,16 @@ public class Item {
     private String name;
     private Long date;
     private String price;
-    private String boughtBy;
+    private String uuidOwner;
+    private String uuidBuyer;
 
-    public Item() {
+    public Item(String uuidOwner){
+//        this.name = name;
+//        this.date = date;
+//        this.price = price;
+        this.uuidOwner = uuidOwner;
     }
 
-    public Item(String name, long date, String price) {
-        this.name = name;
-        this.date = date;
-        this.price = price;
-        this.boughtBy = "";
-
-    }
 
     public String getName() {
         return name;
@@ -26,10 +24,9 @@ public class Item {
         return date;
     }
 
-    public String getPrice() { return price; }
-
-    public String getBoughtBy(){return boughtBy;}
-
+    public String getPrice() {
+        return price;
+    }
 
     public void setName(String name) {
         this.name = name;
@@ -43,7 +40,15 @@ public class Item {
         this.price = price;
     }
 
-    public void setBoughtBy(String boughtBy){this.boughtBy = boughtBy;}
+    public String getUuidOwner() {
+        return uuidOwner;
+    }
 
+    public String getUuidBuyer() {
+        return uuidBuyer;
+    }
 
+    public void setUuidBuyer(String uuidBuyer) {
+        this.uuidBuyer = uuidBuyer;
+    }
 }

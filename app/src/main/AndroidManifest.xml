@@ -31,10 +31,10 @@
         <activity
             android:name=".NewFoodItem"
             android:label="Add an item"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MyItemsActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value=".MyItemsActivity" />
 
         </activity>
 

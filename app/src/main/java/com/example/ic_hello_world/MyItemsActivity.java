@@ -2,6 +2,7 @@ package com.example.ic_hello_world;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
@@ -16,9 +17,13 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MyItemsActivity extends AppCompatActivity {
+
+    private final Map<Button, Item> buttonContext = new HashMap<>();
 
 
 private Context context = this;
@@ -27,14 +32,16 @@ private Context context = this;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_myitems);
 
-        ArrayList<Item> order_history = new ArrayList<>();
-        order_history.add(new Item("cake",1213232,"12"));
 
-        ItemAdapter adapter2 = new ItemAdapter(this,order_history,R.layout.list_item2);
 
-        ListView listView2 = (ListView) findViewById(R.id.order_history_list);
+        //ArrayList<Item> order_history = new ArrayList<>();
+        //order_history.add(new Item("cake",1213232,"12"));
 
-        listView2.setAdapter(adapter2);
+        //ItemAdapter adapter2 = new ItemAdapter(this,order_history,R.layout.list_item2);
+
+        //ListView listView2 = (ListView) findViewById(R.id.order_history_list);
+
+        //listView2.setAdapter(adapter2);
 
         final DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
 
@@ -48,7 +55,7 @@ private Context context = this;
                         System.out.println(uuid.getKey());
                         UserItem userItem = new UserItem(uuid.getKey());
                         for (DataSnapshot product : uuid.getChildren()) {
-                            Item item = new Item();
+                            Item item = new Item(uuid.getKey());
                             System.out.println(product.child("expires").getValue());
                             item.setDate(Long.valueOf(product.child("expires").getValue().toString()));
                             item.setName(product.getKey());
@@ -71,7 +78,7 @@ private Context context = this;
                         }
                     }
 
-                    ItemAdapter adapter1 = new ItemAdapter(context,my_pantry,R.layout.list_item2);
+                    ItemAdapter adapter1 = new ItemAdapter(context,my_pantry,R.layout.list_item2, buttonContext);
                     ListView listView1 = (ListView) findViewById(R.id.my_pantry_list);
                     listView1.setAdapter(adapter1);
 
