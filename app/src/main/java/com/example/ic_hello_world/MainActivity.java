@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
                     String user_id = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
                     for(UserItem user : result) {
-                        if(user_id != user.getUUID()) {
+                        if(!user_id.equals(user.getUUID())) {
                             for (Item item : user.getItems()) {
                                 //add item details to view
                                 items.add(item);
