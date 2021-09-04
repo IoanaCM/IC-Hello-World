@@ -1,5 +1,5 @@
 # Halls Market
-Inspiration
+#Inspiration
 Many students pick up slightly too much food when they go for their weekly shop. This excess food often ends up in the bin. Not only is this financially wasteful but this food could be exactly what other students needed.
 
 # With Halls Market, we are creating a marketplace for food, with proceeds going to charity.
